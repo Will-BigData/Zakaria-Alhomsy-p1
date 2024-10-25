@@ -161,13 +161,12 @@ def storePrompt(user):
 def adminPrompt():
     cont = True
     while(cont):
-        print("What would you like to do: check purchase logs(p), check db logs(d), promote user to admin(a), demote admin to user(u), add inventory(i), modify inventory(m) remove inventory(r), exit(e)")
+        print("What would you like to do: check purchase logs(p), check db logs(d), promote user(a), demote admin(u), add item(i), modify item(m) remove item(r),view inventory, exit(e)")
         adminInput = input().lower()
-        while adminInput != 'p' and adminInput != 'd' and adminInput != 'a' and adminInput != 'u' and adminInput != 'i' and adminInput != 'r' and adminInput != 'e'and adminInput != 'm':
-            print("invalid input please enter: check purchase logs(p), check db logs(d), promote user to admin(a), demote admin to user(u), add inventory(i), modify inventory(m) remove inventory(r), exit(e)")
+        while adminInput != 'p' and adminInput != 'd' and adminInput != 'a' and adminInput != 'u' and adminInput != 'i' and adminInput != 'r' and adminInput != 'e'and adminInput != 'm' and adminInput != 'v':
+            print("invalid input please enter: check purchase logs(p), check db logs(d), promote user(a), demote admin(u), add item(i), modify item(m) remove item(r),view inventory, exit(e)")
             adminInput = input().lower()
         if(adminInput == 'p'):
-
             orders = store.get_all_orders()
             for order in orders:
                 order_to_print = {key: value for key, value in order.items() if key != '_id'}
@@ -235,6 +234,11 @@ def adminPrompt():
             
         elif(adminInput== 'e'):
             cont = False
+        elif(adminInput == 'v'):
+            products = store.get_all_products()
+            product_names = [p['name'].lower() for p in products]
+            for p in products:
+                print(p)
 
 def login():
     print("Please enter your username")
